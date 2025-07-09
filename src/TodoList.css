@@ -1,0 +1,142 @@
+/* TodoList.css */
+.todo-container {
+  max-width: 500px;
+  margin: 30px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.todo-container h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.todo-input {
+  width: 70%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.todo-btn {
+  padding: 10px 15px;
+  margin-left: 10px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.todo-btn:hover {
+  background-color: #0056b3;
+}
+
+.task-item {
+color:black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+   background-color: #f3f3f3;
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.task-item span {
+  flex-grow: 1;
+}
+
+.task-done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.task-actions button {
+  margin-left: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.task-actions button.delete {
+  background-color: #dc3545;
+}
+
+.task-actions button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.task-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.task-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.task-btn.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.task-btn.done {
+  background-color: #28a745;
+  color: white;
+}
+
+.task-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+/* Light & Dark Theme Base */
+.todo-container.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.todo-container.dark {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+.todo-container.dark h4 {
+  margin-bottom: 10px;
+  color: white;
+}
+.todo-container input,
+.todo-container button {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Mode Toggle Button */
+.mode-toggle {
+  float: right;
+  background: transparent;
+  border: 1px solid #888;
+  color: inherit;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.task-done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
