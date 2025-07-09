@@ -1,4 +1,5 @@
-import './App.css'
+// import './App.css'
+import viteLogo from '/vite.svg'
 
 import TodoList from './TodoList.jsx';
 
