@@ -1,11 +1,25 @@
   import { v4 as uuidv4 } from 'uuid';
-  import {useState} from "react";
+  import {useState,useEffect} from "react";
   import "./TodoList.css"
   
  export default function TodoList(){
     let [todos,setTodos]=useState([{task :"Sample" , id:uuidv4(),isDone:false}]);
     let [newTodo,setNewTodo]=useState("");
     let [darkMode, setDarkMode] = useState(true);
+    const [editingId, setEditingId] = useState(null);
+    const [editedTask, setEditedTask] = useState("");
+    // ⬇️ This runs ONCE when component loads
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos"));
+    if (storedTodos) {
+      setTodos(storedTodos);
+    }
+  }, []);
+
+  // ⬇️ This runs whenever "todos" changes
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
 function toggleMode() {
   setDarkMode((prev) => !prev);
@@ -38,15 +52,30 @@ function toggleMode() {
     )
     }
     function markAsDoneAll(){
-        setTodos(todos.map((todo)=>{
-            return {
-                ...todo,
-                isDone:true,
-            }
+    setTodos(todos.map((todo)=>{
+        return {
+            ...todo,
+            isDone:true,
+        };
+    }));
+}
 
-        })
+function startEditing(id, task) {
+  setEditingId(id);
+  setEditedTask(task);
+}
+
+function saveEditedTask(id) {
+  setTodos((prev) =>
+    prev.map((todo) =>
+      todo.id === id ? { ...todo, task: editedTask } : todo
     )
-    }
+  );
+  setEditingId(null);
+  setEditedTask("");
+}
+
+    
     return (
     <div className={`todo-container ${darkMode ? 'dark' : 'light'}`}>
      <button className="mode-toggle" onClick={toggleMode}>
@@ -61,17 +90,37 @@ function toggleMode() {
          {todos.length === 0 && <p>No tasks left. ✅</p>}
         <h4>Tasks to be done :- </h4>
         <ul>
-            {todos.map((todo)=>(
-            <li className="task-item" key={todo.id}>
-                <span style={todo.isDone ? {textDecorationLine:'line-through'}:{}}>{todo.task}</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <div className="task-actions">
-                <button className="task-actions" onClick={()=>deleteTodo(todo.id)}>🗑 Delete</button>
-                <button  className="task-actions" onClick={()=>markAsDone1(todo.id)}> ✔ Mark as done </button>
-                </div>
-                </li>
+            {todos.map((todo) => (
+    <li className="task-item" key={todo.id}>
+      {editingId === todo.id ? (
+        <>
+          <input
+            value={editedTask}
+            onChange={(e) => setEditedTask(e.target.value)}
+          />
+          <button onClick={() => saveEditedTask(todo.id)}>Save</button>
+        </>
+      ) : (
+        <>
+          <span style={todo.isDone ? { textDecorationLine: 'line-through' } : {}}>
+            {todo.task}
+          </span>
+          <div className="task-actions">
+            <button className="task-btn delete" onClick={() => deleteTodo(todo.id)}>
+              🗑 Delete
+            </button>
+            <button className="task-btn done" onClick={() => markAsDone1(todo.id)}>
+              ✔ Done
+            </button>
+            <button className="task-btn" onClick={() => startEditing(todo.id, todo.task)}>
+              ✏ Edit
+            </button>
+          </div>
+        </>
+      )}
+    </li>
+  ))}
            
-            ))}
         </ul>
         <br></br><br></br><br></br>
         {todos.length > 0 && (
