@@ -121,15 +121,15 @@ function saveEditedTask(id) {
             {/* <button className="task-btn delete" onClick={() => deleteTodo(todo.id)}>
               🗑 Delete
             </button> */}
-             <Button className="task-btn delete" variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteTodo(todo.id)}>
-        Delete
-      </Button>
+             <button className="task-btn delete" variant="outlined" size="small" onClick={() => deleteTodo(todo.id)}>
+         <DeleteIcon /> Delete
+      </button>
            
-            <Button variant="contained" color="success" className="task-btn done" onClick={() => markAsDone1(todo.id)} startIcon={<TaskAltSharpIcon/> }>
-         Done
-      </Button>
+            <button variant="contained" color="success" className="task-btn done" onClick={() => markAsDone1(todo.id)} size="small" >
+          <TaskAltSharpIcon/> Done
+      </button>
             
-            <button className="task-btn" onClick={() => startEditing(todo.id, todo.task)}>
+            <button className="task-btn"  variant="contained" size="small" onClick={() => startEditing(todo.id, todo.task)}>
               <EditNoteSharpIcon/> Edit
             </button>
           </div>
