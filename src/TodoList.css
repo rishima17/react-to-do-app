@@ -1,3 +1,6 @@
+.heading{
+  text-align:center;
+}
 /* TodoList.css */
 .todo-container {
   max-width: 500px;
